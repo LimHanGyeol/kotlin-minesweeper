@@ -5,6 +5,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 @DisplayName("위치를 관리하는 Position 테스트")
 class PositionTest {
@@ -18,15 +20,10 @@ class PositionTest {
         assertThat(position.y).isEqualTo(3)
     }
 
-    @Test
-    @DisplayName("0 이하의 값은 x로 설정될 수 없다.")
+    @ParameterizedTest
+    @CsvSource(value = ["0,3", "-1, 3", "3,0", "3, -1"])
+    @DisplayName("0 이하의 값은 x or y 로 사용 될 수 없다.")
     fun invalidX(x: Int, y: Int) {
-        assertThrows<InvalidPositionException> { Position(0, 3) }
-    }
-
-    @Test
-    @DisplayName("0 이하의 값은 y로 설정될 수 없다.")
-    fun invalidY() {
-        assertThrows<InvalidPositionException> { Position(3, 0) }
+        assertThrows<InvalidPositionException> { Position(x, y) }
     }
 }
