@@ -1,4 +1,4 @@
-package minesweeper
+package minesweeper.domain
 
 import minesweeper.exception.InvalidHeightException
 import org.assertj.core.api.Assertions.assertThat
